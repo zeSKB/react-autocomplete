@@ -163,18 +163,14 @@ var Autocomplete = function (_React$Component) {
     key: 'maybeAutoCompleteText',
     value: function maybeAutoCompleteText(state, props) {
       var highlightedIndex = state.highlightedIndex;
-      var value = props.value,
-          getItemValue = props.getItemValue;
 
       var index = highlightedIndex === null ? 0 : highlightedIndex;
       var matchedItem = this.getFilteredItems(props)[index];
-      if (value !== '' && matchedItem) {
-        var itemValue = getItemValue(matchedItem);
-        var itemValueDoesMatch = itemValue.toLowerCase().indexOf(value.toLowerCase()) === 0;
-        if (itemValueDoesMatch) {
-          return { highlightedIndex: index };
-        }
+
+      if (matchedItem) {
+        return { highlightedIndex: index };
       }
+
       return { highlightedIndex: null };
     }
   }, {
