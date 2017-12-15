@@ -27,6 +27,9 @@ function getScrollOffset() {
   };
 }
 
+var SOURCE_BLUR = 'blur';
+var SOURCE_SELECT = 'select';
+
 var Autocomplete = function (_React$Component) {
   _inherits(Autocomplete, _React$Component);
 
@@ -200,7 +203,7 @@ var Autocomplete = function (_React$Component) {
         isOpen: false,
         highlightedIndex: null
       }, function () {
-        _this3.props.onSelect(value, item);
+        _this3.props.onSelect(value, item, SOURCE_SELECT);
       });
     }
   }, {
@@ -265,7 +268,7 @@ var Autocomplete = function (_React$Component) {
         var item = items[highlightedIndex];
         var value = this.props.getItemValue(item);
         setStateCallback = function setStateCallback() {
-          return _this5.props.onSelect(value, item);
+          return _this5.props.onSelect(value, item, SOURCE_BLUR);
         };
       }
       this.setState({
@@ -399,7 +402,7 @@ Autocomplete.propTypes = {
    */
   onChange: PropTypes.func,
   /**
-   * Arguments: `value: String, item: Any`
+   * Arguments: `value: String, item: Any, source: string`
    *
    * Invoked when the user selects an item from the dropdown menu.
    */
@@ -586,7 +589,7 @@ Autocomplete.keyDownHandlers = {
       }, function () {
         //this.refs.input.focus() // TODO: file issue
         _this7.refs.input.setSelectionRange(value.length, value.length);
-        _this7.props.onSelect(value, item);
+        _this7.props.onSelect(value, item, SOURCE_SELECT);
       });
     }
   },
